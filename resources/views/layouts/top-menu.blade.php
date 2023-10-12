@@ -32,7 +32,7 @@
                         </svg>
                     </x-slot>
                     {{ __('Notification') }}
-                    <span class="badge badge-primary badge-outline">13</span>
+                    <span class="badge badge-warning badge-outline">13</span>
                 </x-dropdown-link>
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf

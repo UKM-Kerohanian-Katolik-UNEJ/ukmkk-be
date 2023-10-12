@@ -10,6 +10,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
         <script src="{{ asset('js/init-alpine.js') }}"></script>
+        @stack('style')
 </head>
 <body>
 <div
@@ -36,5 +37,6 @@
         </main>
     </div>
 </div>
+@stack('script')
 </body>
 </html>
