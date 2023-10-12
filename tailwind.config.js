@@ -184,6 +184,7 @@ module.exports = {
         boxShadow: ["focus"],
     },
     plugins: [
-        require("@tailwindcss/forms")
+        require("@tailwindcss/forms"),
+        require("daisyui")
     ],
 };
