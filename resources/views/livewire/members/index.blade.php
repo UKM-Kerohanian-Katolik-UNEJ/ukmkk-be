@@ -191,37 +191,37 @@
 @endpush
 
 @push('script')
-<script>
-    function deleteMahasiswa(nama)
-    {
-        Swal.fire({
-            title: `Apakah anda yakin menghapus akun ini?`,
-            showDenyButton: true,
-            icon: "question",
-            confirmButtonText: 'Simpan',
-            denyButtonText: `Batal`,
-            }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $("form#hapus-mahasiswa").submit();
-            }
-        })
-    }
+    <script>
+        function deleteMahasiswa(nama)
+        {
+            Swal.fire({
+                title: `Apakah anda yakin menghapus akun ini?`,
+                showDenyButton: true,
+                icon: "question",
+                confirmButtonText: 'Simpan',
+                denyButtonText: `Batal`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $("form#hapus-mahasiswa").submit();
+                }
+            })
+        }
 
-    function deleteAllMahasiswa()
-    {
-        Swal.fire({
-            title: `Apakah anda yakin menghapus seluruh akun yang tidak disetujui?`,
-            showDenyButton: true,
-            icon: "question",
-            confirmButtonText: 'Simpan',
-            denyButtonText: `Batal`,
-            }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $("form#hapus-semua-mahasiswa").submit();
-            }
-        })
-    }
-</script>
+        function deleteAllMahasiswa()
+        {
+            Swal.fire({
+                title: `Apakah anda yakin menghapus seluruh akun yang tidak disetujui?`,
+                showDenyButton: true,
+                icon: "question",
+                confirmButtonText: 'Simpan',
+                denyButtonText: `Batal`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $("form#hapus-semua-mahasiswa").submit();
+                }
+            })
+        }
+    </script>
 @endpush
