@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string("nama")->unique();
+            $table->string("slug")->unique();
             $table->string("email")->unique();
             $table->string("no_hp")->unique();
             $table->date("tanggal_lahir");
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string("provinsi_asal");
             $table->string("kabupaten_asal");
             $table->text("alamat_rumah");
-            $table->text("alamat_kost");
+            $table->text("alamat_kost")->nullable();
             $table->enum("golongan_darah", ["A", "B", "AB", "O"]);
             $table->enum("is_verified", ["Pending", "Verified", "Rejected"])->default("Pending");
             $table->string("password");

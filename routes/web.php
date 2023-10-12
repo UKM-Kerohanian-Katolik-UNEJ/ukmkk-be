@@ -26,7 +26,9 @@ Route::get('/admin/dashboard', [DashboardController::class, "index"])->middlewar
 Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     Route::view('about', 'about')->name('about');
 
-    Route::get('anggota', [MemberController::class, 'index'])->name('anggota.index');
+    // Route Anggota
+    Route::resource("anggota", MemberController::class)->except("create", "store", "edit");
+    Route::delete("anggota", [MemberController::class, "destroyAll"])->name("admin.anggota.destroy-all");
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

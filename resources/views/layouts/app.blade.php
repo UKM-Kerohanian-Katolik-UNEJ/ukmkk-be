@@ -10,7 +10,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
         <script src="{{ asset('js/init-alpine.js') }}"></script>
+        <script src="{{ asset("assets/sweetalert2/dist/sweetalert2.all.min.js") }}"></script>
+        <link rel="stylesheet" href="{{ asset("assets/sweetalert2/dist/sweetalert2.min.css") }}">
         @stack('style')
+        @livewireStyles
 </head>
 <body>
 <div
@@ -37,6 +40,8 @@
         </main>
     </div>
 </div>
+@livewireScripts
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 @stack('script')
 </body>
 </html>
