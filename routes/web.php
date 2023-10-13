@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,9 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     Route::resource("anggota", MemberController::class)->except("create", "store", "edit");
     Route::delete("anggota", [MemberController::class, "destroyAll"])->name("admin.anggota.destroy-all");
 
+    // Route Konten
+    Route::resource("konten", ContentController::class);
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

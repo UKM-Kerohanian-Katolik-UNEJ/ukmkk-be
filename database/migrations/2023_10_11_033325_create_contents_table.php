@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained();
-            $table->string("title");
+            $table->string("judul");
             $table->string("slug");
             $table->enum("kategori", ["Proker", "Artikel"]);
             $table->longText("konten");

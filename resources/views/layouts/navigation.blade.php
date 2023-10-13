@@ -31,7 +31,7 @@
             </li>
 
             <li class="relative px-6 py-3">
-                <x-nav-link href="{{ route('admin.about') }}" :active="request()->routeIs('admin.about')">
+                <x-nav-link href="{{ route('admin.konten.index') }}" :active="request()->routeIs('admin.konten.*')">
                     <x-slot name="icon">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                              stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
