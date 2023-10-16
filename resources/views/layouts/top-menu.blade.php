@@ -27,6 +27,7 @@
                     </x-slot>
                     {{ __('Profile') }}
                 </x-dropdown-link>
+                @role("admin|bph")
                 <x-dropdown-link onclick="notifikasi.showModal()" class="cursor-pointer">
                     <x-slot name="icon">
                         <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -36,6 +37,7 @@
                     {{ __('Notification') }}
                     <span class="badge badge-warning badge-outline">{{ count($notification) }}</span>
                 </x-dropdown-link>
+                @endrole
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
                     <x-dropdown-link :href="route('admin.logout')"
