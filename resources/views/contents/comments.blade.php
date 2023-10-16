@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="p-4 bg-white rounded-lg shadow-xs">
-    @foreach ($content->CommentContents as $comment)
+    @foreach ($comments as $comment)
         <div class="group px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <div class="flex gap-3">
                     <div class="relative hidden w-10 h-10 mr-3 rounded-full md:block">
@@ -21,10 +21,10 @@
                             <h3 class="font-semibold">{{ $comment->Member->nama }}</h3>
                             <p class="text-xs text-gray-400">{{ $comment->Member->fakultas_asal }}</p>
                         </div>
-                        <p class="text-justify">{{ $comment->Comment->konten }}</p>
+                        <p class="text-justify">{{ $comment->konten }}</p>
                     </div>
 
-                    <a  href="{{ route("admin.konten.komentar.destroy", $comment->comment_id) }}"
+                    <a  href="{{ route("admin.konten.komentar.destroy", $comment->id) }}"
                         class="group-hover:flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray -mt-40 lg:-mt-14 lg:hidden"
                         aria-label="Delete"
                     >

@@ -204,7 +204,9 @@ class ContentController extends Controller
         ContentView::whereContentId($konten->id)->delete();
         
         // Delete Comment
-        $comments = Comment::whereContentId($konten->id)->delete();
+        Comment::whereContentId($konten->id)->delete();
+
+        // Delete media and data
         $konten->clearMediaCollection("gambar_andalan_konten");
         $konten->clearMediaCollection("galeri_konten");
         $konten->delete();
@@ -213,8 +215,9 @@ class ContentController extends Controller
 
     public function comment(Content $konten)
     {
+        $comments = Comment::with("Member")->whereContentId($konten->id)->get();
         return view("contents.comments")->with([
-            "content" => $konten
+            "comments" => $comments
         ]);
     }
 
