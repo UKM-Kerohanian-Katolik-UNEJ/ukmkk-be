@@ -17,6 +17,7 @@
                 </x-nav-link>
             </li>
 
+            @role("admin|bph")
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('admin.anggota.index') }}" :active="request()->routeIs('admin.anggota.*')">
                     <x-slot name="icon">
@@ -29,6 +30,7 @@
                     {{ __('Anggota') }}
                 </x-nav-link>
             </li>
+            @endrole
 
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('admin.konten.index') }}" :active="request()->routeIs('admin.konten.*')">

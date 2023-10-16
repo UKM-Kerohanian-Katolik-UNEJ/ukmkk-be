@@ -33,9 +33,10 @@
 
             <div class="mb-3">
                 <label class="label font-semibold">Gambar Utama <i>(Berupa file .webp)</i></label>
+                <img id="preview" width="200px">
                 <input type="file" name="gambar_andalan_konten" class="file-input file-input-bordered w-full @error("gambar_andalan_konten")
                     file-input-error
-                @enderror"/>
+                @enderror" id="gambar_andalan_konten"/>
                 @error('gambar_andalan_konten')
                     <span class="text-red-700">{{ $message }}</span>
                 @enderror

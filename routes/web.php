@@ -26,9 +26,12 @@ Route::get('/admin/dashboard', [DashboardController::class, "index"])->middlewar
 Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     Route::view('about', 'about')->name('about');
 
-    // Route Anggota
-    Route::resource("anggota", MemberController::class)->except("create", "store", "edit");
-    Route::delete("anggota", [MemberController::class, "destroyAll"])->name("anggota.destroy-all");
+    Route::group(["middleware" => "role:admin|bph"], function()
+    {
+        // Route Anggota
+        Route::resource("anggota", MemberController::class)->except("create", "store", "edit");
+        Route::delete("anggota", [MemberController::class, "destroyAll"])->name("anggota.destroy-all");
+    });
 
     // Route Konten
     Route::resource("konten", ContentController::class)->except("show");

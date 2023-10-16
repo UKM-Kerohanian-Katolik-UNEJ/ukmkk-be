@@ -18,14 +18,14 @@ class Content extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function CommentContents()
-    {
-        return $this->hasMany(CommentContent::class);
-    }
-
     public function ContentViews()
     {
         return $this->hasMany(ContentView::class);
+    }
+
+    public function Comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function registerMediaCollections(): void

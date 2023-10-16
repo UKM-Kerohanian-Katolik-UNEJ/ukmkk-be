@@ -14,7 +14,8 @@
         </div>
         <div class="flex flex-col gap-3 items-center lg:flex-row">
             <select wire:model="kategori" class="select select-bordered w-[100px]">
-                <option value="Kategori">Kategori</option>
+                <option value="">Kategori</option>
+                <option value="Proker">Proker</option>
                 <option value="Artikel">Artikel</option>
             </select>
             <input wire:model="pencarian" type="text" class="input input-bordered w-[350px]" placeholder="Masukkan pencarian"/>
@@ -55,7 +56,7 @@
                                 >
                                     <img
                                     class="object-cover w-full h-full rounded-full"
-                                    src="{{ $content->getFirstMediaUrl("gambar_utama_konten") }}"
+                                    src="{{ $content->getFirstMediaUrl("gambar_andalan_konten") }}"
                                     alt=""
                                     loading="lazy"
                                     />
@@ -108,13 +109,13 @@
                                             </svg>
                                         </button>
                                     </a>
-                                    <form id="hapus-mahasiswa" action="#" method="post">
+                                    <form id="hapus-konten" action="{{ route("admin.konten.destroy", $content->slug) }}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         <button type="button"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Delete"
-                                            onclick="deleteMahasiswa()"
+                                            onclick="deleteKonten('{{ $content->slug }}')"
                                         >
                                             <svg
                                             class="w-5 h-5"
@@ -166,10 +167,10 @@
     
     @push('script')
         <script>
-            function deleteMahasiswa(nama)
+            function deleteKonten(nama)
             {
                 Swal.fire({
-                    title: `Apakah anda yakin menghapus akun ini?`,
+                    title: `Apakah anda yakin menghapus konten ini? Menghapus konten akan menghapus data, galeri, dan komentar`,
                     showDenyButton: true,
                     icon: "question",
                     confirmButtonText: 'Simpan',
@@ -177,23 +178,7 @@
                     }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        $("form#hapus-mahasiswa").submit();
-                    }
-                })
-            }
-    
-            function deleteAllMahasiswa()
-            {
-                Swal.fire({
-                    title: `Apakah anda yakin menghapus seluruh akun yang tidak disetujui?`,
-                    showDenyButton: true,
-                    icon: "question",
-                    confirmButtonText: 'Simpan',
-                    denyButtonText: `Batal`,
-                    }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        $("form#hapus-semua-mahasiswa").submit();
+                        $("form#hapus-konten").submit();
                     }
                 })
             }

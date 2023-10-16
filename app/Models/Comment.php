@@ -16,8 +16,8 @@ class Comment extends Model
         return $this->belongsTo(Member::class);
     }
 
-    public function CommentContents()
+    public function Content()
     {
-        return $this->hasMany(CommentContent::class);
+        return $this->belongsTo(Content::class);
     }
 }

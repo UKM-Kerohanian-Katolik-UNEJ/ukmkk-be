@@ -43,5 +43,21 @@
 @livewireScripts
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 @stack('script')
+<script>
+    /* Preview Image Script */
+    let gambar_andalan_konten_input = document.getElementById("gambar_andalan_konten");
+    gambar_andalan_konten_input.addEventListener("change", function()
+    {
+        let file = gambar_andalan_konten_input.files[0];
+        let reader = new FileReader();
+        reader.addEventListener("load", function()
+        {
+            let image_source = document.getElementById("preview");
+            image_source.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+    });
+</script>
 </body>
 </html>
