@@ -1,6 +1,6 @@
 <div>
     <div class="flex justify-center lg:justify-start">
-        <a href="#" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Konten</a>
+        <a href="{{ route("admin.konten.create") }}" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Konten</a>
     </div>
     <div class="flex flex-col lg:flex-row lg:justify-between items-center mb-3 gap-3">
         <div class="flex gap-3">
@@ -51,22 +51,47 @@
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <div
-                                    class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+                                    class="relative w-[100px] mr-3 rounded-full block"
                                 >
                                     <img
                                     class="object-cover w-full h-full rounded-full"
-                                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                    src="{{ $content->getFirstMediaUrl("gambar_utama_konten") }}"
                                     alt=""
                                     loading="lazy"
                                     />
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $content->ContentViews->viewers ?? 0 }}
+                                @if (count($content->ContentViews) > 0)
+                                    {{ $content->ContentViews->viewers ?? 0 }}
+                                @else
+                                    0
+                                @endif
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                    <a href="#">
+                                    <a href="{{ route("admin.konten.kometar", $content->slug) }}">
+                                        <button
+                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                            aria-label="Edit"
+                                        >
+                                            <svg
+                                                class="w-5 h-5"
+                                                aria-hidden="true"
+                                                fill="none"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                                ></path>
+                                            </svg>
+                                        </button>
+                                    </a>
+                                    <a href="{{ route("admin.konten.edit", $content->slug) }}">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-yellow-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit"

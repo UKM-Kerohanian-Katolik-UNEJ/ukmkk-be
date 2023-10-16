@@ -25,12 +25,17 @@ class Content extends Model implements HasMedia
 
     public function ContentViews()
     {
-        return $this->hasMany(ContentViews::class);
+        return $this->hasMany(ContentView::class);
     }
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection("gambar-andalan-konten");
-        $this->addMediaCollection("galeri-konten");
+        $this->addMediaCollection("gambar_andalan_konten");
+        $this->addMediaCollection("galeri_konten");
+    }
+
+    public function getRouteKeyName()
+    {
+        return "slug";
     }
 }

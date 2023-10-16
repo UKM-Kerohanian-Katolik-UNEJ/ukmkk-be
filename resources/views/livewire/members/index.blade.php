@@ -10,7 +10,7 @@
             <span class="my-auto">Entries</span>
         </div>
         <div class="flex flex-col gap-3 items-center lg:flex-row">
-            <form id="hapus-semua-mahasiswa" action="{{ route("admin.admin.anggota.destroy-all") }}" method="post">
+            <form id="hapus-semua-mahasiswa" action="{{ route("admin.anggota.destroy-all") }}" method="post">
                 @csrf
                 @method("DELETE")
                 <button
