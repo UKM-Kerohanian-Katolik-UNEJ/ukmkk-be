@@ -1,6 +1,6 @@
 <div>
     <div class="flex justify-center lg:justify-start">
-        <a href="{{ route("admin.artikel.create") }}" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Konten</a>
+        <a href="{{ route("admin.artikel.create") }}" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Artikel</a>
     </div>
     <div class="flex flex-col lg:flex-row lg:justify-between items-center mb-3 gap-3">
         <div class="flex gap-3">

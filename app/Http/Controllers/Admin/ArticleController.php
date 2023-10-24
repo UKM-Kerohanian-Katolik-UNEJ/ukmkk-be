@@ -58,42 +58,42 @@ class ArticleController extends Controller
 
             $artikel->addMediaFromRequest("gambar_andalan_konten")->toMediaCollection("gambar_andalan_konten");
 
-            // Cek apakah user input galeri
-            if($request->hasFile("galeri_konten"))
-            {
-                // get file zip
-                $zip_file = $request->file("galeri_konten");
+            // // Cek apakah user input galeri
+            // if($request->hasFile("galeri_konten"))
+            // {
+            //     // get file zip
+            //     $zip_file = $request->file("galeri_konten");
 
-                // extract zip
-                $zip = new ZipArchive;
-                $zip->open($zip_file);
-                $zip->extractTo(public_path() . "/zip/");
-                $zip->close();
+            //     // extract zip
+            //     $zip = new ZipArchive;
+            //     $zip->open($zip_file);
+            //     $zip->extractTo(public_path() . "/zip/");
+            //     $zip->close();
 
-                // get all gallery
-                $galleries = File::allFiles(public_path()."/zip/");
-                $is_valid = true;
-                // loop galleries to store into media
-                foreach($galleries as $gallery)
-                {
-                    // check if file is jpg, png, or jpeg
-                    $extension = $gallery->getExtension();
-                    if($extension == "webp") {
-                        $artikel->addMedia($gallery->getRealPath())->toMediaCollection("galeri_konten");
-                        File::delete($gallery->getRealPath());
-                    } else {
-                        File::delete($gallery->getRealPath());
-                        $is_valid = false;
-                    }
-                }
+            //     // get all gallery
+            //     $galleries = File::allFiles(public_path()."/zip/");
+            //     $is_valid = true;
+            //     // loop galleries to store into media
+            //     foreach($galleries as $gallery)
+            //     {
+            //         // check if file is jpg, png, or jpeg
+            //         $extension = $gallery->getExtension();
+            //         if($extension == "webp") {
+            //             $artikel->addMedia($gallery->getRealPath())->toMediaCollection("galeri_konten");
+            //             File::delete($gallery->getRealPath());
+            //         } else {
+            //             File::delete($gallery->getRealPath());
+            //             $is_valid = false;
+            //         }
+            //     }
 
-                if(!$is_valid){
-                    DB::rollBack();
-                    session()->flash('error', 'File yang didalam zip harus berupa webp');
-                    File::delete($zip_file);
-                    return redirect()->back();
-                }
-            }
+            //     if(!$is_valid){
+            //         DB::rollBack();
+            //         session()->flash('error', 'File yang didalam zip harus berupa webp');
+            //         File::delete($zip_file);
+            //         return redirect()->back();
+            //     }
+            // }
             DB::commit();
             return redirect()->route("admin.artikel.index")->with("success", "Data berhasil disimpan");
         }catch(Exception $e)
@@ -156,40 +156,40 @@ class ArticleController extends Controller
                     $artikel->addMediaFromRequest("gambar_andalan_konten")->toMediaCollection("gambar_andalan_konten");
                 }
     
-                // check if gallery is not null
-                if($request->hasFile("galeri_konten")) {
-                    // get zip file
-                    $zip_file = $request->file("galeri_konten");
+                // // check if gallery is not null
+                // if($request->hasFile("galeri_konten")) {
+                //     // get zip file
+                //     $zip_file = $request->file("galeri_konten");
     
-                    // extract it
-                    $zip = new ZipArchive;
-                    $zip->open($zip_file);
-                    $zip->extractTo(public_path()."/zip/");
-                    $zip->close();
+                //     // extract it
+                //     $zip = new ZipArchive;
+                //     $zip->open($zip_file);
+                //     $zip->extractTo(public_path()."/zip/");
+                //     $zip->close();
     
-                    // get all gallery
-                    $galleries = File::allFiles(public_path()."/zip/");
+                //     // get all gallery
+                //     $galleries = File::allFiles(public_path()."/zip/");
     
-                    $is_valid = true;
-                    // loop galleries to store into media
-                    foreach($galleries as $gallery)
-                    {
-                        $extension = $gallery->getExtension();
-                        if($extension == "webp") {
-                            $artikel->addMedia($gallery->getRealPath())->toMediaCollection("galeri_konten");
-                            File::delete($gallery->getRealPath());
-                        } else {
-                            File::delete($gallery->getRealPath());
-                            $is_valid = false;
-                        }
-                    }
-                    if(!$is_valid){
-                        DB::rollBack();
-                        session()->flash('error', 'File yang didalam zip harus berupa webp');
-                        File::delete($zip_file);
-                        return redirect()->back();
-                    }
-                }
+                //     $is_valid = true;
+                //     // loop galleries to store into media
+                //     foreach($galleries as $gallery)
+                //     {
+                //         $extension = $gallery->getExtension();
+                //         if($extension == "webp") {
+                //             $artikel->addMedia($gallery->getRealPath())->toMediaCollection("galeri_konten");
+                //             File::delete($gallery->getRealPath());
+                //         } else {
+                //             File::delete($gallery->getRealPath());
+                //             $is_valid = false;
+                //         }
+                //     }
+                //     if(!$is_valid){
+                //         DB::rollBack();
+                //         session()->flash('error', 'File yang didalam zip harus berupa webp');
+                //         File::delete($zip_file);
+                //         return redirect()->back();
+                //     }
+                // }
                 DB::commit();
                 return redirect()->route("admin.artikel.index")->with("success", "Data berhasil diubah");
             } catch (Exception $e) {

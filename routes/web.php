@@ -36,7 +36,7 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
 
     // Route Konten
     Route::resource("artikel", ArticleController::class)->except("show");
-    Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comment"])->name("artikel.kometar");
+    Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comments"])->name("artikel.kometar");
     Route::delete("artikel/{komentar}", [ArticleController::class, "destroy_comment"])->name("artikel.komentar.destroy");
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

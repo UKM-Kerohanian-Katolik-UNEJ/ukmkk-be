@@ -37,7 +37,7 @@
                 @enderror
             </div>
             
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="label font-semibold">Galeri (Boleh dilewati) <i>(Berupa file .zip dan berisi file .webp)</i></label>
                 <input type="file" name="galeri_konten" class="file-input file-input-bordered w-full @error("galeri_konten")
                     file-input-error
@@ -45,7 +45,7 @@
                 @error('galeri_konten')
                     <span class="text-red-700">{{ $message }}</span>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="flex gap-3 mt-7">
                 <button class="btn btn-primary">Simpan</button>
