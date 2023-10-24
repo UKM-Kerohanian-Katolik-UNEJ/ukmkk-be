@@ -4,6 +4,6 @@
     </x-slot>
 
     <div class="p-4 bg-white rounded-lg shadow-xs">
-        <livewire:content.index /> 
+        <livewire:article.index /> 
     </div>
 </x-app-layout>

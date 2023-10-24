@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MemberController;
@@ -34,9 +35,9 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     });
 
     // Route Konten
-    Route::resource("konten", ContentController::class)->except("show");
-    Route::get("konten/{konten}/komentar", [ContentController::class, "comment"])->name("konten.kometar");
-    Route::delete("konten/{komentar}", [ContentController::class, "destroy_comment"])->name("konten.komentar.destroy");
+    Route::resource("artikel", ArticleController::class)->except("show");
+    Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comment"])->name("artikel.kometar");
+    Route::delete("artikel/{komentar}", [ArticleController::class, "destroy_comment"])->name("artikel.komentar.destroy");
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -3,41 +3,27 @@
         <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     @endpush
     <x-slot name="header">
-        {{ __('Edit Konten') }}
+        {{ __('Buat Konten') }}
     </x-slot>
     <div class="p-4 bg-white rounded-lg shadow-xs">
-        <form method="post" action="{{ route("admin.konten.update", $konten->slug) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route("admin.artikel.store") }}" enctype="multipart/form-data">
             @csrf
-            @method("PUT")
             <div class="mb-3">
                 <label class="label font-semibold">Judul</label>
                 <input type="text" placeholder="Masukkan judul konten" class="input input-bordered w-full @error("judul")
                     input-error
-                @enderror" name="judul" value="{{ $konten->judul }}"/>
+                @enderror" name="judul" value="{{ old("judul") }}"/>
                 @error('judul')
                     <span class="text-red-700">{{ $message }}</span>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label class="label font-semibold">Tipe Konten</label>
-                <select name="kategori" class="select select-bordered w-full @error("kategori")
-                    select-error
-                @enderror">
-                    <option value="Artikel" {{ $konten->kategori == "Artikel" ? "selected" : "" }}>Artikel</option>
-                    <option value="Proker" {{ $konten->kategori == "Proker" ? "selected" : "" }}>Program Kerja</option>
-                </select>
-                @error('kategori')
-                    <span class="text-red-700">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="mb-3">
                 <label class="label font-semibold">Gambar Utama <i>(Berupa file .webp)</i></label>
-                <img src={{ $konten->getFirstMediaUrl("gambar_andalan_konten") }} width="200px" id="preview" />
+                <img id="preview" width="200px">
                 <input type="file" name="gambar_andalan_konten" class="file-input file-input-bordered w-full @error("gambar_andalan_konten")
                     file-input-error
-                @enderror" id="gambar_andalan_konten" value={{ $konten->getFirstMediaUrl("gambar_andalan_konten") }}/>
+                @enderror" id="gambar_andalan_konten"/>
                 @error('gambar_andalan_konten')
                     <span class="text-red-700">{{ $message }}</span>
                 @enderror
@@ -45,9 +31,7 @@
 
             <div class="mb-3">
                 <label class="label font-semibold">Konten</label>
-                <textarea name="konten">
-                    {{ $konten->konten }}
-                </textarea>
+                <textarea name="konten">{{ old("konten") }}</textarea>
                 @error('konten')
                     <span class="text-red-700">{{ $message }}</span>
                 @enderror
@@ -66,7 +50,7 @@
             <div class="flex gap-3 mt-7">
                 <button class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-error">Reset</button>
-                <a href="{{ route("admin.konten.index") }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ route("admin.artikel.index") }}" class="btn btn-warning">Kembali</a>
             </div>
         </form> 
     </div>
@@ -76,6 +60,14 @@
                 Swal.fire(
                     "Gagal",
                     `{{ session("error") }}`,
+                    "error"
+                );
+            </script>
+        @elseif($errors->any())
+            <script>
+                Swal.fire(
+                    "Gagal",
+                    `{{ $errors->first() }}`,
                     "error"
                 );
             </script>
