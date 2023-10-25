@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\AspirasiController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MemberController;
@@ -46,6 +47,9 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     Route::delete("proker/{komentar}", [ProkerController::class, "destroy_comment"])->name("proker.komentar.destroy");
     Route::get("proker/{proker}/galeri", [ProkerController::class, "galleries"])->name("proker.galeri");
     Route::delete("proker/{galeri}/galeri", [ProkerController::class, "destroy_gallery"])->name("proker.galeri.destroy");
+
+    // Route Aspirasi
+    Route::get("aspirasi", [AspirasiController::class, "index"])->name("aspirasi.index");
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -44,8 +44,8 @@
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn bg-white border border-gray-300 m-1">...</label>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li class="hover:bg-green-500 font-semibold rounded-lg"><a>Export Excel</a></li>
-                    <li class="hover:bg-red-600 rounded-lg font-semibold"><a>Export PDF</a></li>
+                    <li class="hover:bg-green-500 font-semibold rounded-lg group"><a class="group-hover:text-white">Export Excel</a></li>
+                    <li class="hover:bg-red-600 rounded-lg font-semibold group"><a class="group-hover:text-white">Export PDF</a></li>
                 </ul>
             </div>
         </div>

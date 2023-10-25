@@ -67,6 +67,28 @@
             </li>
 
             <li class="relative px-6 py-3">
+                <x-nav-link href="{{ route('admin.aspirasi.index') }}" :active="request()->routeIs('admin.aspirasi.*')">
+                    <x-slot name="icon">
+                        <svg
+                            class="w-5 h-5"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            >
+                            <path
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            ></path>
+                        </svg>
+                    </x-slot>
+                    {{ __('Aspirasi') }}
+                </x-nav-link>
+            </li>
+
+            <li class="relative px-6 py-3">
                 <button class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                         @click="toggleMultiLevelMenu" aria-haspopup="true">
                 <span class="inline-flex items-center">
