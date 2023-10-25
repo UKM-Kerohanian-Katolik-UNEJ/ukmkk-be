@@ -21,7 +21,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view("articles.index");
+        return view("pages.articles.index");
     }
 
     /**
@@ -29,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view("articles.create");
+        return view("pages.articles.create");
     }
 
     /**
@@ -118,7 +118,7 @@ class ArticleController extends Controller
     {
         if($artikel->user_id == Auth::user()->id )
         {
-            return view("articles.edit")->with([
+            return view("pages.articles.edit")->with([
                 'artikel' => $artikel
             ]);
         }
@@ -228,7 +228,7 @@ class ArticleController extends Controller
         if($artikel->user_id == Auth::user()->id )
         {
             $comments = Comment::with("Member")->whereContentId($artikel->id)->paginate(10);
-            return view("articles.comments")->with([
+            return view("pages.articles.comments")->with([
                 "comments" => $comments
             ]);
         }

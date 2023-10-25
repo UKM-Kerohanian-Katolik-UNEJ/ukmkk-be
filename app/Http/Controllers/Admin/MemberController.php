@@ -13,12 +13,12 @@ class MemberController extends Controller
 {
     public function index()
     {
-        return view("users.index");
+        return view("pages.users.index");
     }
 
     public function show(Member $anggotum)
     {
-        return view("users.show")->with([
+        return view("pages.users.show")->with([
             "member" => $anggotum
         ]);
     }

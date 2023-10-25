@@ -23,7 +23,7 @@ class ProkerController extends Controller
      */
     public function index()
     {
-        return view("proker.index");
+        return view("pages.proker.index");
     }
 
     /**
@@ -31,7 +31,7 @@ class ProkerController extends Controller
      */
     public function create()
     {
-        return view("proker.create");
+        return view("pages.proker.create");
     }
 
     /**
@@ -142,7 +142,7 @@ class ProkerController extends Controller
      */
     public function edit(Content $proker)
     {
-        return view("proker.edit", compact("proker"));
+        return view("pages.proker.edit", compact("proker"));
     }
 
     /**
@@ -283,7 +283,7 @@ class ProkerController extends Controller
         if($proker->user_id == Auth::user()->id )
         {
             $comments = Comment::with("Member")->whereContentId($proker->id)->paginate(10);
-            return view("proker.comments")->with([
+            return view("pages.proker.comments")->with([
                 "comments" => $comments
             ]);
         }
@@ -300,7 +300,7 @@ class ProkerController extends Controller
     {
         if($proker->user_id == Auth::user()->id)
         {
-            return view("proker.gallery")->with([
+            return view("pages.proker.gallery")->with([
                 "galleries" => $proker->getMedia("galeri_konten")
             ]);
         }
