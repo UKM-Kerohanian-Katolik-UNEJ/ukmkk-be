@@ -1,6 +1,6 @@
 <div>
     <div class="flex justify-center lg:justify-start">
-        <a href="{{ route("admin.artikel.create") }}" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Artikel</a>
+        <a href="{{ route("admin.proker.create") }}" class="btn btn-primary mb-3 w-full max-w-[170px]">+ Tambah Proker</a>
     </div>
     <div class="flex flex-col lg:flex-row lg:justify-between items-center mb-3 gap-3">
         <div class="flex gap-3">
@@ -33,17 +33,17 @@
                 <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                 >
-                    @foreach ($articles as $article)
+                    @foreach ($prokers as $proker)
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
                                 <div class="flex items-center text-sm">
                                     <div>
-                                        <p class="font-semibold">{{ $article->judul }}</p>
+                                        <p class="font-semibold">{{ $proker->judul }}</p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $article->kategori }}
+                                {{ $proker->kategori }}
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <div
@@ -51,22 +51,32 @@
                                 >
                                     <img
                                     class="object-cover w-full h-full rounded-full"
-                                    src="{{ $article->getFirstMediaUrl("gambar_andalan_konten") }}"
+                                    src="{{ $proker->getFirstMediaUrl("gambar_andalan_konten") }}"
                                     alt=""
                                     loading="lazy"
                                     />
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                @if (count($article->ContentViews) > 0)
-                                    {{ $article->ContentViews->viewers }}
+                                @if (count($proker->ContentViews) > 0)
+                                    {{ $proker->ContentViews->viewers }}
                                 @else
                                     0
                                 @endif
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                    <a href="{{ route("admin.artikel.komentar", $article->slug) }}">
+                                    <a href="{{ route("admin.proker.galeri", $proker->slug) }}">
+                                        <button
+                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-green-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                            aria-label="Edit"
+                                        >
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                            </svg>
+                                        </button>
+                                    </a>
+                                    <a href="{{ route("admin.proker.komentar", $proker->slug) }}">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit"
@@ -87,7 +97,7 @@
                                             </svg>
                                         </button>
                                     </a>
-                                    <a href="{{ route("admin.artikel.edit", $article->slug) }}">
+                                    <a href="{{ route("admin.proker.edit", $proker->slug) }}">
                                         <button
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-yellow-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit"
@@ -104,13 +114,13 @@
                                             </svg>
                                         </button>
                                     </a>
-                                    <form id="hapus-konten" action="{{ route("admin.artikel.destroy", $article->slug) }}" method="post">
+                                    <form id="hapus-konten" action="{{ route("admin.proker.destroy", $proker->slug) }}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         <button type="button"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-red-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Delete"
-                                            onclick="deleteKonten('{{ $article->slug }}')"
+                                            onclick="deleteKonten('{{ $proker->slug }}')"
                                         >
                                             <svg
                                             class="w-5 h-5"
@@ -136,7 +146,7 @@
         
         {{-- Pagination --}}
         <div class="px-4 py-3 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-600">
-            {{ $articles->links() }}
+            {{ $prokers->links() }}
         </div>
     </div>
     @push('script')
@@ -178,5 +188,5 @@
                 })
             }
         </script>
-    @endpush       
+    @endpush
 </div>

@@ -228,7 +228,7 @@ class ArticleController extends Controller
         if($artikel->user_id == Auth::user()->id )
         {
             $comments = Comment::with("Member")->whereContentId($artikel->id)->paginate(10);
-            return view("contents.comments")->with([
+            return view("articles.comments")->with([
                 "comments" => $comments
             ]);
         }

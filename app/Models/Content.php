@@ -28,6 +28,11 @@ class Content extends Model implements HasMedia
         return $this->hasMany(Comment::class);
     }
 
+    public function ContentSchedules()
+    {
+        return $this->hasMany(ContentSchedule::class);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection("gambar_andalan_konten");

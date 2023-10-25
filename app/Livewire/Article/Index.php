@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Article;
 
+use App\Models\article;
 use App\Models\Content;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -17,13 +18,13 @@ class Index extends Component
 
     public function render()
     {
-        $contents = Content::where("judul", "like", "%" . $this->pencarian . "%")->whereUserId(Auth::user()->id);
+        $articles = Content::where("judul", "like", "%" . $this->pencarian . "%")->whereUserId(Auth::user()->id);
         if($this->kategori)
         {
-            $contents->whereKategori($this->kategori);
+            $articles->whereKategori($this->kategori);
         }
         return view('livewire.article.index')->with([
-            "contents" => $contents->whereKategori("Artikel")->with(["ContentViews", "Media"])->paginate($this->pagination)
+            "articles" => $articles->whereKategori("Artikel")->with(["ContentViews", "Media"])->paginate($this->pagination)
         ]);
     }
 }

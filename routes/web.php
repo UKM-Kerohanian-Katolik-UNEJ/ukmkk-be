@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\ProkerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +35,17 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
         Route::delete("anggota", [MemberController::class, "destroyAll"])->name("anggota.destroy-all");
     });
 
-    // Route Konten
+    // Route Artikel
     Route::resource("artikel", ArticleController::class)->except("show");
-    Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comments"])->name("artikel.kometar");
+    Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comments"])->name("artikel.komentar");
     Route::delete("artikel/{komentar}", [ArticleController::class, "destroy_comment"])->name("artikel.komentar.destroy");
+
+    // Route Proker
+    Route::resource("proker", ProkerController::class)->except("show");
+    Route::get("proker/{proker}/komentar", [ProkerController::class, "comments"])->name("proker.komentar");
+    Route::delete("proker/{komentar}", [ProkerController::class, "destroy_comment"])->name("proker.komentar.destroy");
+    Route::get("proker/{proker}/galeri", [ProkerController::class, "galleries"])->name("proker.galeri");
+    Route::delete("proker/{galeri}/galeri", [ProkerController::class, "destroy_gallery"])->name("proker.galeri.destroy");
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
