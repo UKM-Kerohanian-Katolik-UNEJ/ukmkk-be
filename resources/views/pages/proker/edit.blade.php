@@ -101,7 +101,7 @@
             <div class="flex gap-3 mt-7">
                 <button class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-error">Reset</button>
-                <a href="{{ route("admin.artikel.index") }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ route("admin.proker.index") }}" class="btn btn-warning">Kembali</a>
             </div>
         </form> 
     </div>
