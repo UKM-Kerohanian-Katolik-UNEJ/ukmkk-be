@@ -11,7 +11,7 @@
                     Login
                 </h1>
 
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('admin.login') }}">
                     @csrf
 
                     <!-- Input[ype="email"] -->

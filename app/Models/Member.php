@@ -28,4 +28,9 @@ class Member extends Model implements HasMedia
         $this->addMediaCollection("avatar");
         $this->addMediaCollection("ktm");
     }
+
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
 }

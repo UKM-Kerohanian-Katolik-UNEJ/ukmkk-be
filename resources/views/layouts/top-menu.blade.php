@@ -10,12 +10,15 @@
         <x-dropdown>
             <x-slot name="trigger">
                 <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none" @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
-                    {{ Auth::user()->name }}
+                    Hi, {{ Auth::user()->name }} UKMKK
+                    @if (count($notification) > 0)
+                        <div class="badge badge-warning badge-xs"></div>
+                    @endif
                 </button>
             </x-slot>
 
             <x-slot name="content">
-                <x-dropdown-link href="{{ route('profile.edit') }}">
+                <x-dropdown-link href="{{ route('admin.profile.edit') }}">
                     <x-slot name="icon">
                         <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
@@ -24,6 +27,7 @@
                     </x-slot>
                     {{ __('Profile') }}
                 </x-dropdown-link>
+                @role("admin|bph")
                 <x-dropdown-link onclick="notifikasi.showModal()" class="cursor-pointer">
                     <x-slot name="icon">
                         <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -31,11 +35,12 @@
                         </svg>
                     </x-slot>
                     {{ __('Notification') }}
-                    <span class="badge badge-primary badge-outline">13</span>
+                    <span class="badge badge-warning badge-outline">{{ count($notification) }}</span>
                 </x-dropdown-link>
-                <form method="POST" action="{{ route('logout') }}">
+                @endrole
+                <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
-                    <x-dropdown-link :href="route('logout')"
+                    <x-dropdown-link :href="route('admin.logout')"
                                      onclick="event.preventDefault(); this.closest('form').submit();">
                         <x-slot name="icon">
                             <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,64 +79,76 @@
                     <tbody
                         class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                     >
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                <div
-                                    class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                                >
-                                    <img
-                                    class="object-cover w-full h-full rounded-full"
-                                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                    alt=""
-                                    loading="lazy"
-                                    />
+                        @foreach ($notification as $data)
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                    <!-- Avatar with inset shadow -->
                                     <div
-                                    class="absolute inset-0 rounded-full shadow-inner"
-                                    aria-hidden="true"
-                                    ></div>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">Christianus Yoga Wibisono</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                    Fakultas Ilmu Komputer
-                                    </p>
-                                </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                2021
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                                >
-                                Pending
-                                </span>
-                            </td>
-                            <td class="px-4 py-3">
-                                <div class="flex items-center space-x-4 text-sm">
-                                    <a href="#">
-                                        <button
-                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-yellow-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                            aria-label="Edit"
+                                        class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+                                    >
+                                        <img
+                                        class="object-cover w-full h-full rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                        alt=""
+                                        loading="lazy"
+                                        />
+                                        <div
+                                        class="absolute inset-0 rounded-full shadow-inner"
+                                        aria-hidden="true"
+                                        ></div>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">{{ $data->nama }}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                        {{ $data->fakultas_asal }}
+                                        </p>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ $data->tahun_masuk }}
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    @if ($data->is_verified === "Pending")
+                                        <span
+                                        class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:bg-yellow-700 dark:text-yellow-100"
                                         >
-                                            <svg
-                                            class="w-5 h-5"
-                                            aria-hidden="true"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
+                                    @elseif($data->is_verified === "Pending")
+                                        <span
+                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                                        >
+                                    @else
+                                        <span
+                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100"
+                                        >
+                                    @endif
+                                    {{ $data->is_verified }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <a href="{{ route("admin.anggota.show", $data->slug) }}">
+                                            <button
+                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-yellow-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                aria-label="Edit"
                                             >
-                                            <path
-                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                                            ></path>
-                                            </svg>
-                                        </button>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                                <svg
+                                                class="w-5 h-5"
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                                >
+                                                <path
+                                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                                                ></path>
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
