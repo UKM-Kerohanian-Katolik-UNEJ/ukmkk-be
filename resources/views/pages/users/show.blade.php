@@ -15,7 +15,7 @@
                         />
                 </div>
 
-                <a href="" class="btn btn-success btn-outline font-bold">Lihat KTM</a>
+                <a target="_blank" href="{{ $member->getFirstMediaUrl("ktm") }}" class="btn btn-success btn-outline font-bold">Lihat KTM</a>
                 <form id="form-status" action="{{ route("admin.anggota.update", $member->slug) }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -32,6 +32,10 @@
                     <div class="flex flex-col">
                         <h5 class="font-medium">Nama</h5>
                         <p>{{ $member->nama }}</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <h5 class="font-medium">Email</h5>
+                        <p>{{ $member->email }}</p>
                     </div>
                     <div class="flex flex-col">
                         <h5 class="font-medium">NIM</h5>
