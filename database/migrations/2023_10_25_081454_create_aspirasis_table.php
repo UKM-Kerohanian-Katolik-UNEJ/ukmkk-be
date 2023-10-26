@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment_contents', function (Blueprint $table) {
+        Schema::create('aspirasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("comment_id")->constrained();
-            $table->foreignId("content_id")->constrained();
+            $table->string("nama")->nullable();
+            $table->text("aspirasi");
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment_contents');
+        Schema::dropIfExists('aspirasis');
     }
 };
