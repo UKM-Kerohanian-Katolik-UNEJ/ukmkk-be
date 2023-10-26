@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\MemberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,11 @@ Route::prefix("auth")->group(function()
     Route::post("logout", [MemberController::class, "logout"]);
     Route::post("refresh", [MemberController::class, "refresh"]);
     Route::get("me", [MemberController::class, "me"]);
+});
+
+// Article Routes
+Route::prefix("artikel")->group(function()
+{
+    Route::get("/", [ArticleController::class, "index"]);
+    Route::get("/{artikel}", [ArticleController::class, "show"]);
 });

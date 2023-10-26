@@ -58,11 +58,7 @@
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                @if (count($proker->ContentViews) > 0)
-                                    {{ $proker->ContentViews->viewers }}
-                                @else
-                                    0
-                                @endif
+                                {{ $proker->ContentViews->where("content_id", $proker->id)->sum("viewers") }}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
