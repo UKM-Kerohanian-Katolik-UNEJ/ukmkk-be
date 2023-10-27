@@ -34,35 +34,39 @@ class DashboardController extends Controller
             $bar["tahun"][] = $dataBar->tahun_masuk;
             $bar["jumlah"][] = $dataBar->jumlah;
         }
-        $pembacaProkerBulanan = DB::table("content_views")
-                        ->selectRaw('content_views.bulan as bulan, SUM(viewers) as jumlah')
-                        ->where("content_views.tahun", $tahun)
-                        ->where("contents.kategori", "Proker")
-                        ->join("contents", "contents.id", "=", "content_views.content_id")
-                        ->groupBy("content_views.bulan")
-                        ->orderBy("content_views.bulan")
-                        ->get();
+        $pembacaProkerTahunan = DB::table('content_views')
+                            ->select('content_views.tahun', DB::raw('SUM(content_views.viewers) as jumlah'))
+                            ->join('contents', 'content_views.content_id', '=', 'contents.id')
+                            ->where('contents.kategori', '=', 'Proker')
+                            ->where("tahun", $tahun)
+                            ->groupBy("tahun")
+                            ->orderBy("tahun")
+                            ->get();
 
-        $pembacaArtikelBulanan = DB::table("content_views")
-                        ->selectRaw('content_views.bulan as bulan, SUM(viewers) as jumlah')
-                        ->where("content_views.tahun", $tahun)
-                        ->where("contents.kategori", "Artikel")
-                        ->join("contents", "contents.id", "=", "content_views.content_id")
-                        ->groupBy("content_views.bulan")
-                        ->orderBy("content_views.bulan")
-                        ->get();
-        /* Line */
         $line = [];
-        $line["bulan"] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "August", "Sept", "Oct", "Nov", "Dec"];
-        $line["jumlah_pembaca_proker"] = [];
-        $line["jumlah_pembaca_artikel"] = [];
-
-        foreach ($pembacaProkerBulanan as $item) {
-            $line["jumlah_pembaca_proker"][] = $item->jumlah;
+        $line["tahun"] = [];
+        if($tahun == date("Y"))
+        {
+            $line["tahun"][] = $tahun;
         }
 
-        foreach ($pembacaArtikelBulanan as $item) {
-            $line["jumlah_pembaca_artikel"][] = $item->jumlah;
+        foreach($pembacaProkerTahunan as $dataLine)
+        {
+            $line["jumlah_pembaca_proker"][] = $dataLine->jumlah;
+        }
+
+        $pembacaArtikelTahunan = DB::table('content_views')
+                            ->select('content_views.tahun', DB::raw('SUM(content_views.viewers) as jumlah'))
+                            ->join('contents', 'content_views.content_id', '=', 'contents.id')
+                            ->where('contents.kategori', '=', 'Artikel')
+                            ->where("tahun", $tahun)
+                            ->groupBy("tahun")
+                            ->orderBy("tahun")
+                            ->get();
+
+        foreach($pembacaArtikelTahunan as $dataLine)
+        {
+            $line["jumlah_pembaca_artikel"][] = $dataLine->jumlah;
         }
         
         return view("dashboard", compact("prokers", "articles", "pengurus", "anggota", "bar", "line"));
