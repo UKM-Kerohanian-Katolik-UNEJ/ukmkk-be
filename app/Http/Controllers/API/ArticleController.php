@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Content;
 use App\Models\ContentView;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['only' => ['createComments']]);
+    }
+
     public function index()
     {
         $articles = Content::with(["User"])->whereKategori("Artikel")->orderByDesc("created_at")->paginate(10);
@@ -20,7 +28,7 @@ class ArticleController extends Controller
     {
         DB::beginTransaction(); // Mulai transaksi database
     try {
-        $artikel = Content::with(["User"])
+        $artikel = Content::with(["User", "Comments.Member"])
             ->whereSlug($slug)
             ->whereKategori("Artikel")
             ->lockForUpdate()
@@ -55,5 +63,30 @@ class ArticleController extends Controller
 
 
         return ResponseFormatter::success("Data Artikel Berhasil Diambil", $artikel);
+    }
+
+    public function createComments(Content $artikel, Request $request)
+    {
+        $request->validate([
+            "content_id" => "exists:contents,id",
+            "member_id" => "exists:members,id",
+            "konten" => "required"
+        ]);
+
+        DB::beginTransaction();
+        try
+        {
+            $comment = Comment::create([
+                "content_id" => $artikel->id,
+                "member_id" => Auth::guard("api")->user()->id,
+                "konten" => $request->konten
+            ]);
+            DB::commit();
+            return ResponseFormatter::success("Komentar Berhasil Ditambahkan", $comment);
+        } catch(Exception $e)
+        {
+            DB::rollBack();
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
     }
 }

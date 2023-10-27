@@ -35,4 +35,5 @@ Route::prefix("artikel")->group(function()
 {
     Route::get("/", [ArticleController::class, "index"]);
     Route::get("/{artikel}", [ArticleController::class, "show"]);
+    Route::post("/{artikel}/komentar", [ArticleController::class, "createComments"]);
 });
