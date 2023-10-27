@@ -186,16 +186,16 @@
         new Chart(line, {
             type: 'line',
             data: {
-            labels: {!! json_encode($line["bulan"]) !!},
+            labels: {!! json_encode($line["tahun"]) !!},
             datasets: [
                 {
                     label: 'Artikel',
-                    data: {!! json_encode($line["jumlah_pembaca_proker"] ?? []) !!},
+                    data: {!! json_encode($line["jumlah_pembaca_artikel"] ?? []) !!},
                     borderWidth: 1
                 },
                 {
                     label: 'Proker',
-                    data: {!! json_encode($line["jumlah_pembaca_artikel"] ?? []) !!},
+                    data: {!! json_encode($line["jumlah_pembaca_proker"] ?? []) !!},
                     borderWidth: 1
                 },
             ]

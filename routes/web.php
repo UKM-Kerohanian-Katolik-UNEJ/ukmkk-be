@@ -39,12 +39,12 @@ Route::middleware('auth')->prefix("admin")->name("admin.")->group(function () {
     // Route Artikel
     Route::resource("artikel", ArticleController::class)->except("show");
     Route::get("artikel/{artikel}/komentar", [ArticleController::class, "comments"])->name("artikel.komentar");
-    Route::delete("artikel/{komentar}", [ArticleController::class, "destroy_comment"])->name("artikel.komentar.destroy");
+    Route::delete("artikel/{komentar}/komentar", [ArticleController::class, "destroy_comment"])->name("artikel.komentar.destroy");
 
     // Route Proker
     Route::resource("proker", ProkerController::class)->except("show");
     Route::get("proker/{proker}/komentar", [ProkerController::class, "comments"])->name("proker.komentar");
-    Route::delete("proker/{komentar}", [ProkerController::class, "destroy_comment"])->name("proker.komentar.destroy");
+    Route::delete("proker/{komentar}/komentar", [ProkerController::class, "destroy_comment"])->name("proker.komentar.destroy");
     Route::get("proker/{proker}/galeri", [ProkerController::class, "galleries"])->name("proker.galeri");
     Route::delete("proker/{galeri}/galeri", [ProkerController::class, "destroy_gallery"])->name("proker.galeri.destroy");
 

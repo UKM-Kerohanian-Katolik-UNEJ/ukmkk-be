@@ -42,6 +42,7 @@ class MemberController extends Controller
 
     public function destroy(Member $anggotum)
     {
+        $anggotum->clearMediaCollection("ktm");
         MemberSkill::whereMemberId($anggotum->id)->delete();
         $anggotum->delete();
         return redirect()->back()->with("success", "Data berhasil dihapus");
@@ -60,6 +61,7 @@ class MemberController extends Controller
             }
             foreach ($members as $member) {
                 # code...
+                $member->clearMediaCollection("ktm");
                 MemberSkill::whereMemberId($member->id);
                 $member->delete();
             }
