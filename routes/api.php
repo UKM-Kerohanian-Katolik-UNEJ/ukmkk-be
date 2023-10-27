@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ArticleController;
 use App\Http\Controllers\API\MemberController;
+use App\Http\Controllers\API\ProkerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,12 @@ Route::prefix("artikel")->group(function()
     Route::get("/", [ArticleController::class, "index"]);
     Route::get("/{artikel}", [ArticleController::class, "show"]);
     Route::post("/{artikel}/komentar", [ArticleController::class, "createComments"]);
+});
+
+// Proker Routes
+Route::prefix("proker")->group(function()
+{
+    Route::get("/", [ProkerController::class, "index"]);
+    Route::get("/{proker}", [ProkerController::class, "show"]);
+    Route::post("/{proker}/komentar", [ProkerController::class, "createComments"]);
 });
