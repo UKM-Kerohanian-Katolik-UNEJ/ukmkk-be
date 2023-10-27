@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ArticleController;
+use App\Http\Controllers\API\AspirasiController;
 use App\Http\Controllers\API\MemberController;
 use App\Http\Controllers\API\ProkerController;
 use Illuminate\Http\Request;
@@ -45,4 +46,10 @@ Route::prefix("proker")->group(function()
     Route::get("/", [ProkerController::class, "index"]);
     Route::get("/{proker}", [ProkerController::class, "show"]);
     Route::post("/{proker}/komentar", [ProkerController::class, "createComments"]);
+});
+
+// Aspirasi Routes
+Route::prefix("aspirasi")->group(function()
+{
+    Route::post("/", [AspirasiController::class, "createAspirasi"]);
 });

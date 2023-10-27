@@ -43,10 +43,10 @@
                                 {{ $aspirasi->nama ?? "Anonim-" . $no++ }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $member->created_at }}
+                                {{ $aspirasi->created_at }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $member->aspirasi }}
+                                {{ $aspirasi->aspirasi }}
                             </td>
                         </tr>
                     @endforeach
