@@ -138,7 +138,7 @@
                             <label class="label">Nama</label>
                             <input type="text" name="nama_jadwal[]" class="input input-bordered w-full @error("nama_jadwal")
                                 input-error
-                            @enderror" value="{{ old("nama_jadwal") }}" required/>
+                            @enderror" required/>
                             @error('nama_jadwal')
                                 <span class="text-red-700">{{ $message }}</span>
                             @enderror
@@ -147,7 +147,7 @@
                             <label class="label">Tanggal Mulai</label>
                             <input type="date" name="tanggal_mulai[]" class="input input-bordered w-full @error("tanggal_mulai")
                                 input-error
-                            @enderror" value="{{ old("tanggal_mulai") }}" required/>
+                            @enderror" required/>
                             @error('tanggal_mulai')
                                 <span class="text-red-700">{{ $message }}</span>
                             @enderror
@@ -156,7 +156,7 @@
                             <label class="label">Tanggal Selesai (Boleh dilewati)</label>
                             <input type="date" name="tanggal_selesai[]" class="input input-bordered w-full @error("tanggal_selesai")
                                 input-error
-                            @enderror" value="{{ old("tanggal_selesai") }}"/>
+                            @enderror"/>
                             @error('tanggal_selesai')
                                 <span class="text-red-700">{{ $message }}</span>
                             @enderror
