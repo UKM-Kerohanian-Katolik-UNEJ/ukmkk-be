@@ -19,7 +19,8 @@ class ProkerController extends Controller
 
     public function index()
     {
-        $prokers = Content::with(["User", "media"])->whereKategori("Proker")->orderByDesc("created_at")->paginate(10);
+        $limit = request()->input("limit", 10);
+        $prokers = Content::with(["User", "media"])->whereKategori("Proker")->orderByDesc("created_at")->paginate($limit);
         return ResponseFormatter::success("Data Proker Berhasil Diambil", $prokers);
     }
 
